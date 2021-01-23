@@ -13,15 +13,16 @@ const Search = () => {
     
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth)
+  const [names, setNames]=useState([]);
   useEffect(() => {
-     dispatch(loadUser());
+    //  dispatch(loadUser());
      dispatch(searchMembers());
      if(auth.members){
          setNames(auth.members);
      }
      console.log("working")
-  },[auth]); 
-  const [names, setNames]=useState([]);
+  },[auth.members]); 
+  
 
   const[key, setKey]=useState('');
   const handleChange = (e) => {
@@ -29,10 +30,7 @@ const Search = () => {
   };
   const[searchResults, setSearchresults]=useState([]);
 
-  useEffect(() => {
-      const results = names.filter(name => name.toLowerCase().includes(key.toLowerCase()));
-      setSearchresults(results);
-  },[key]);
+  
 
       
    return(

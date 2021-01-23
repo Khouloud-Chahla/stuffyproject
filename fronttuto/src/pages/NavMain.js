@@ -1,5 +1,6 @@
 import React , {useEffect}from 'react';
 import {Link} from 'react-router-dom';
+import {Row, Col} from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
@@ -22,16 +23,31 @@ const NavMain = () => {
   } , [])
     return(
             <Navbar className="justify-content-center" bg="dark" variant="info">
+              <Col>
               <Navbar.Brand href="/" style={{color:'white',display:'flex'}}><HomeIcon/>MyStuff Service</Navbar.Brand>
+              </Col>
               <Nav className="justify-content-left">
-              {/* <Nav.Link href="/main">Home<br></br>Accueil</Nav.Link> */}
-              <Nav.Link href="/sender">Send a Parcel<br></br>Envoyer un Colis</Nav.Link>
-              <Nav.Link href="/parsel">My Parcels<br></br>Mes Colis</Nav.Link>
-              <Nav.Link href="/receiver">To Receive<br></br>A Recevoir</Nav.Link>
-              
-              <Nav.Link href="/">Who are we<br></br>Qui sommes nous</Nav.Link>
-              <Nav.Link href="/">Contact us<br></br>Contacter-nous</Nav.Link>
-              <Nav.Link href="/" onClick={() => logout()}>Logout<br></br>Déconnexion</Nav.Link>
+                {auth.isAuth ? (
+                  <>
+                    <Col><Nav.Link style={{color: 'white'}} href="/main">Home</Nav.Link></Col>
+                    <Col><Nav.Link style={{color: 'white'}} href="/sender">Send a Parcel </Nav.Link></Col>
+                    <Col><Nav.Link style={{color: 'white'}} href="/parsel">My requests for send</Nav.Link></Col>
+                    <Col><Nav.Link style={{color: 'white'}} href="/receiver">What i have to receive</Nav.Link></Col>
+                    <Col><Nav.Link style={{color: 'white'}} href="/edit">Edit my profile</Nav.Link></Col>
+                    <Col><Nav.Link style={{color: 'white'}} href="/">Who are we</Nav.Link></Col>
+                    <Col><Nav.Link style={{color: 'white'}} href="/">Contact us</Nav.Link></Col>
+                    <Col><Nav.Link style={{color: 'white'}} href="/" onClick={() => logout()}>Logout</Nav.Link></Col>
+                   
+                  </>
+                ) : (
+                  <>
+                  <Col><Nav.Link style={{color: 'white'}}  href="/">Home</Nav.Link></Col>
+                  <Col><Nav.Link style={{color: 'white'}}  href="/login">Login</Nav.Link></Col>
+                  <Col><Nav.Link style={{color: 'white'}} href="/register">Create an account</Nav.Link></Col>
+                  <Col><Nav.Link style={{color: 'white'}} href="/">Who are we</Nav.Link></Col>
+                  <Col><Nav.Link style={{color: 'white'}} href="/">Contact us</Nav.Link></Col>
+                  </>
+                )}
             </Nav>
             {/* <Form inline>
               <FormControl type="text" placeholder="Search" className="mr-sm-2" />

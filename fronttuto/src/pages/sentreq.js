@@ -9,6 +9,8 @@ import Card from 'react-bootstrap/Card';
 import Accordion from 'react-bootstrap/Accordion';
 import Footer from './Footer';
 import NavMain from './NavMain';
+import Shake from 'react-reveal/Shake';
+import Flash from 'react-reveal/Flash';
 
 import { loadUser } from '../actions/authActions';
 
@@ -21,12 +23,13 @@ const Sentreq = () => {
 
     return(
         <Container>
-            <NavMain/>
+            
             <br></br>
             <Jumbotron>
             {auth.colis && 
                     <div>
-                         <h4 style={{color:'green'}}>Your request has been sent successfully</h4><br></br>
+                        <Shake><h4 style={{color:'green'}}>Your request has been sent successfully</h4></Shake>
+                         <br></br>
                          <Accordion>
                           <Card>
                               <Card.Header>
@@ -39,17 +42,17 @@ const Sentreq = () => {
                               <p>of Type: <strong>{auth.colis.type}</strong> for <strong>{auth.colis.receiver}</strong><br></br>
                               It will be delivered in <strong>{auth.colis.days} days</strong> from <strong>{auth.colis.departure}</strong> to <strong>{auth.colis.arrival}</strong></p>
                               <br></br>
-                              <h2 style={{color:'green'}}>THANK YOU FOR YOUR TRUST</h2>
+                              <Flash><h1 style={{color:'purple', fontFamily:'cambria', fontStyle:'bold'}}>THANK YOU FOR YOUR TRUST</h1></Flash>
                               </Card.Body>
                               </Accordion.Collapse>
                           </Card>
                         </Accordion>
                     </div> 
-                // <h2>Dear {auth.user.firstname}, we appreciate your trust. We will call you in 24 hours in order to pick up the parsel you're sending to {auth.colis.receiver}</h2>
+               
                 }
             </Jumbotron>
             <br></br>
-            <Footer/>
+            
         </Container>
 
     )

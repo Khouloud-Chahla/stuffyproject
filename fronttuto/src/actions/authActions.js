@@ -20,6 +20,21 @@ import {
     ADMIN_FAIL,
     MEMBERS_LOAD_SUCCESS,
     MEMBERS_LOAD_FAIL,
+    VERIFY_SUCCESS,
+    VERIFY_FAIL,
+    EDIT_SUCCESS,
+    EDIT_FAIL,
+    SEND_EMAIL_SUCCESS,
+    SEND_EMAIL_FAIL,
+    SEND_PWD_SUCCESS,
+    SEND_PWD_FAIL,
+    COND_SUCCESS,
+    COND_FAIL,
+    PWD_CHANGE_SUCCESS,
+    PWD_CHANGE_FAIL,
+    SEND_CODE_SUCCESS,
+    SEND_CODE_FAIL,
+
 } from "./types";
 import axios from 'axios';
 import setToken from '../setToken';
@@ -34,10 +49,22 @@ export const registerUser = (info) => (dispatch) => {
     }))
     .catch(err => dispatch({
         type: REGISTER_FAIL,
-        payload: err.response.data.msg,
-    })
-    );
-};
+        payload: err.response.data,
+    }))
+}
+
+export const verify = (info) => dispatch => {
+    axios.post('/register/verify', info)
+    .then(res => dispatch({
+        type: VERIFY_SUCCESS,
+        payload: res.data,
+    }))
+    .catch(err =>  dispatch({
+           type: VERIFY_FAIL,
+           payload: err.response.data,
+    }));
+
+}
  
 export const loadUser = () => dispatch => {
     setToken()
@@ -48,7 +75,7 @@ export const loadUser = () => dispatch => {
     }))
     .catch(err => dispatch({
         type: LOAD_USER_FAIL,
-        payload: err.response.data.msg,
+        payload: err.response.data.errors,
     })
     );
 };
@@ -61,9 +88,9 @@ export const loginUser = (info) => (dispatch) => {
      }))
      .catch(err => dispatch({
          type: LOGIN_FAIL,
-         payload:err.response.data.msg,
-     })
-     );
+         payload: err.response.data.errors,
+     }));
+  
 };
 
 export const logoutUser = () => dispatch => {
@@ -115,7 +142,7 @@ export const receivedParcel = () => dispatch => {
 
 export const searchMembers = () => dispatch => {
     setToken()
-    axios.get('/login/add')
+    axios.get('/sender/add')
     .then(res => dispatch({
         type: SEARCH_SUCCESS,
         payload: res.data,
@@ -138,7 +165,7 @@ export const adminLoad = () => dispatch => {
     }));
 };
  export const membersLoad = () => dispatch => {
-     axios.get('/admin/members')
+     axios.get('/admin/mbr')
      .then(res => dispatch({
          type: MEMBERS_LOAD_SUCCESS,
          payload: res.data,
@@ -146,6 +173,81 @@ export const adminLoad = () => dispatch => {
      .catch(err => dispatch({
          type: MEMBERS_LOAD_FAIL,
          payload: err.response.data.msg,
+     }))
+ }
+
+ export const editProfile = (info) => dispatch => {
+     setToken()
+     axios.post('/edit', info)
+     .then(res => dispatch({
+         type: EDIT_SUCCESS,
+         payload: res.data,
+     }))
+     .catch(err => dispatch({
+         type: EDIT_FAIL,
+         payload: err.response.data.msg
+     }))
+ }
+ //send email to reset password 
+ export const sendEmail = (info) => dispatch => {
+     axios.put('/edit/reset', info)
+     .then(res => dispatch({
+         type: SEND_EMAIL_SUCCESS,
+         payload: res.data,
+     }))
+     .catch(err => dispatch({
+         type: SEND_EMAIL_FAIL,
+         payload: err.response.data,
+     }))
+ }
+
+ export const sendCode = (info) => dispatch => {
+     axios.post('/reset', info)
+     .then(res => dispatch({
+         type: SEND_CODE_SUCCESS,
+         payload: res.data,
+     }))
+     .catch(err => dispatch({
+         type: SEND_CODE_FAIL,
+         payload: err.response.data
+     }))
+ }
+
+ // password generation
+ export const sendPwd = (info) => dispatch => {
+     setToken()
+     axios.post('/edit/resetaccount', info)
+     .then(res => dispatch({
+         type: SEND_PWD_SUCCESS,
+         payload: res.data,
+     }))
+     .catch(err => dispatch({
+         type: SEND_PWD_FAIL,
+         payload: err.response.data,
+     }))
+ }
+ export const updatecondition = (info) => dispatch => {
+     axios.put('/admin/:id', info)
+     .then(res => dispatch({
+         type: COND_SUCCESS,
+         payload: res.data,
+     }))
+     .catch(err => dispatch({
+         type: COND_FAIL,
+         payload: err.response.data,
+     }))
+ }
+
+ export const changePWD = (info) => dispatch => {
+     setToken();
+     axios.put('/edit', info)
+     .then(res => dispatch({
+         type: PWD_CHANGE_SUCCESS,
+         payload: res.data,
+     }))
+     .catch(err => dispatch({
+         type: PWD_CHANGE_FAIL,
+         payload: err.response.data,
      }))
  }
 

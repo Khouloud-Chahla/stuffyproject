@@ -11,6 +11,7 @@ import Footer from './Footer';
 import NavMain from './NavMain';
 import {showParcel} from '../actions/authActions';
 import { loadUser } from '../actions/authActions';
+import Flash from 'react-reveal/Flash';
 
 const Parcels = () => {
     const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const Parcels = () => {
     // };
     return(
         <Container>
-            <NavMain/>
+            
             <br></br>
             <Jumbotron>
                 {/* {auth.colis && 
@@ -63,14 +64,14 @@ const Parcels = () => {
                     </div> 
                 // <h2>Dear {auth.user.firstname}, we appreciate your trust. We will call you in 24 hours in order to pick up the parsel you're sending to {auth.colis.receiver}</h2>
                 } */}
-                {allrequest.length === 0 && <h3 style={{color:'maroon', fontStyle:'cambria'}}> You dont have any requests yet </h3>}
+                {allrequest.length === 0 && <Flash><h3 style={{color:'maroon', fontStyle:'cambria'}}> You don't have any requests yet</h3></Flash>}
                 {(allrequest.length > 0) && allrequest.map(el => <Jumbotron>
-                  You sent <strong style={{color:'red'}}>a request</strong> on <strong>{el.created_at}</strong>to deliver a parcel of type <strong>{el.type}.</strong> to the member:<strong>{el.receiver}</strong><br></br>
-                  It will be delivered in <strong> {el.days} days </strong>, from <strong>{el.departure}</strong>to <strong>{el.arrival}</strong>. 
+                  You have sent <strong style={{color:'red'}}>a request</strong> on <strong>{el.created_at}</strong><br></br>to deliver a parcel of type <strong>{el.type} </strong> to the member with email: <strong>{el.receiver}</strong><br></br>
+                  It will be delivered in <strong> {el.days} days </strong>, from <strong>{el.departure}</strong> to <strong>{el.arrival}</strong>. 
                   <br></br> 
                 </Jumbotron>)}
             </Jumbotron>
-            <Footer/>
+           
         </Container>
     )
 

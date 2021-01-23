@@ -12,12 +12,11 @@ const NavLogin = () => {
             <Navbar className="justify-content-center" bg="dark" variant="info">
               <Navbar.Brand href="dark" style={{color:'white',display:'flex'}}><HomeIcon/>MyStuff Service</Navbar.Brand>
               <Nav className="justify-content-left">
-              <Nav.Link href="/">Home<br></br>Accueil</Nav.Link>
-              <Nav.Link href="/register">Create an account<br></br>Créer un compte</Nav.Link>
+              
               {/* <Nav.Link href="/sender">Send a package<br></br>Envoyer un Colis</Nav.Link> */}
               {/* <Nav.Link href="/receiver">Receive a package<br></br>Recevoir un colis</Nav.Link> */}
-              <Nav.Link href="/">Who are we<br></br>Qui sommes nous</Nav.Link>
-              <Nav.Link href="/">Contact us<br></br>Contacter-nous</Nav.Link>
+              <Nav.Link href="/">Who are we</Nav.Link>
+              <Nav.Link href="/">Contact us</Nav.Link>j
               {/* <Nav.Link href="/" onClick={() => logout()}>Logout<br></br>Déconnexion</Nav.Link> */}
             </Nav>
             {/* <Form inline>

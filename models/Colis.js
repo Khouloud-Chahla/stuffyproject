@@ -4,6 +4,10 @@ const ColisSchema = mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "user" //on reference a la collection user
      },
+    emailowner:{
+        type: String,
+        default: "not specified"
+    },
     days:{
         type: Number,
         
@@ -25,7 +29,7 @@ const ColisSchema = mongoose.Schema({
         type: String,
         
     },
-    condition: String,
+    
   
     created_at: {
         type: Date,

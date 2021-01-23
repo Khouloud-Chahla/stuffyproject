@@ -11,44 +11,59 @@ import { loginUser } from '../actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Login = ({ history }) => {
+
     const[info, setInfo] = useState({
         email:'',
-        password:''
+        password:'',
     });
+    const [errors, setErrors] = useState(null);
+    const [verif, setVerif] = useState(false)
+
     const dispatch = useDispatch();
     const auth = useSelector((state) => state.auth);
+
     useEffect(() => {
         if(auth.isAuth) {
             history.push("/main");
         }
-    }, [auth.isAuth])
+        if(auth.erreurs) {
+             setErrors(auth.erreurs)
+        }
+        if(!auth.verified){
+            setVerif(true)
+        }
+    }, [auth.isAuth, auth.erreurs, auth.verified]);
+
     const login = e => {
         e.preventDefault();
         dispatch(loginUser(info));
         setInfo({
             email:'',
-            password:''
+            password:'',
 
-        })
+        });
     };
     const handleChange = e => {
         setInfo({...info,[e.target.name]:e.target.value})
     };
     return(
         <div>
-            <NavLogin/>
+            
         
-        <Container>
+            <Container>
             
             <br></br>
             <div>
             <Jumbotron>
             <form onSubmit={login}>
-                
                 <div><label style={{color:'green'}}>Email</label><br></br><input type="text" name="email" value={info.email} onChange={handleChange}/></div>
                 <div><label style={{color:'green'}}>Password</label><br></br><input type="password" name="password" value={info.passsword} onChange={handleChange}/></div>
                 <br></br>
                 <Button type="submit" variant='primary'>Connect</Button>
+                <br></br><br></br>
+                <div>{ errors && errors.map(el => <><h6 style={{color:'red', fontFamily:'cambria'}}>{el.msg}</h6><br></br><Link to='/edit/reset'>Forgot Password ??</Link><br></br><br></br>
+                {verif && <Link to='/register/verify'>Verify your account ?</Link>}</>)}
+                <br></br></div>
             </form>
             <br></br>
             <Link to='/register'>You don't have an account yet ?</Link>
@@ -57,7 +72,7 @@ const Login = ({ history }) => {
             </div>
             
         </Container>
-        <Footer/>
+        
         </div>
     )
 }

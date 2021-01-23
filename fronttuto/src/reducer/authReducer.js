@@ -19,6 +19,20 @@ import {
     ADMIN_SUCCESS,
     MEMBERS_LOAD_SUCCESS,
     MEMBERS_LOAD_FAIL,
+    VERIFY_SUCCESS,
+    VERIFY_FAIL,
+    EDIT_SUCCESS,
+    EDIT_FAIL,
+    SEND_EMAIL_SUCCESS,
+    SEND_EMAIL_FAIL,
+    SEND_PWD_SUCCESS,
+    SEND_PWD_FAIL,
+    COND_SUCCESS,
+    COND_FAIL,
+    PWD_CHANGE_SUCCESS,
+    PWD_CHANGE_FAIL,
+    SEND_CODE_SUCCESS,
+    SEND_CODE_FAIL,
 } from "../actions/types";
 
 let initState = {
@@ -28,51 +42,138 @@ let initState = {
     allcolis: null,
     receivedP: null,
     isAuth: false,
-    errors: null,
+    verified: false,
+    erreurs: null,
     members: null,
     adminloading: null,
     members: null,
+    generate: false,
+    generated: false,
+    edit: false,
+    registered: false,
+    passchange: false,
+    generateCode: false,
 };
 const AuthReducer = (state = initState, action) => {
     switch (action.type) {
+        
         case LOAD_USER_SUCCESS:
+           
             return{
                 ...state,
                 user: action.payload,
-                errors: null,
+                // errors: null,
                 isAuth: true,
+
+               
             };
-        case LOGIN_SUCCESS:    
+        case PWD_CHANGE_SUCCESS: 
+        return{
+            ...state,
+            user: action.payload,
+            // errors: null,
+            isAuth: true,
+            passchange: true,
+        };    
+        case EDIT_SUCCESS:
+            return{
+                ...state,
+                isAuth: true,
+                edit: true,
+               
+            } ;   
+            
+        case SEND_CODE_SUCCESS:
+            localStorage.setItem('token', action.payload.token)
+            return {
+                ...state,
+                token: action.payload.token,
+                // isAuth: true,
+                generateCode: true,
+                isAuth: true,
+                
+            };
+
+        case SEND_EMAIL_SUCCESS:
         case REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token)
             return {
                 ...state,
                 token: action.payload.token,
-                isAuth: true,
-                errors: null,
+                // isAuth: true,
+                registered: true,
+                erreurs: null,
+                generate: true,
+                edit: false,
             };
+            case LOGIN_SUCCESS: 
+                 localStorage.setItem('token', action.payload.token)
+                return {
+                ...state,
+                token: action.payload.token,
+                isAuth: true,
+               
+                erreurs: null,
+                
+              };
+            case VERIFY_SUCCESS:
+                localStorage.setItem('token', action.payload.token)
+                return{
+                    ...state,
+                    verified: true,
+                    isAuth: true,
+                    edit: false,
+                    registered: false,
+                };
+            case VERIFY_FAIL:
+            
+                return{
+                    ...state,
+                    erreurs: action.payload,
+                    edit: false,
+                };
+            case SEND_PWD_SUCCESS:
+                return{
+                    ...state,
+                    user: action.payload,
+                    generated: true,
+                    edit: false,
+                } ;
+            case SEND_PWD_FAIL:
+            case PWD_CHANGE_FAIL:    
+                return{
+                    ...state,
+                    erreurs: action.payload,
+                    edit: false,
+                    passchange: false,
+                };
+
             case LOGIN_FAIL:
             case LOAD_USER_FAIL:
             case REGISTER_FAIL:
+            case SEND_EMAIL_FAIL:
             localStorage.removeItem('token')
             return {
                 ...state,
                 isAuth: false,
-                errors: action.payload,
+                erreurs: action.payload,
+                edit: false,
             };
             case COLIS_SUCCESS:    
                 return{
                     ...state,
                     colis: action.payload,
-                    errors: null,
+                    // errors: null,
                     isAuth: true,
+                    edit: false,
                 };
                 case LOAD_ALL_SUCCESS:
                     return{
                         ...state,
                         allcolis: action.payload,
-                        errors: null,
+                        // errors: null,
                         isAuth: true,
+                        edit: false,
 
                     };
                 case LOAD_RECEIVED_SUCCESS:
@@ -80,6 +181,7 @@ const AuthReducer = (state = initState, action) => {
                         ...state,
                         receivedP: action.payload,
                         isAuth: true,
+                        edit: false,
                     };
                     
             case SEARCH_SUCCESS:
@@ -87,27 +189,31 @@ const AuthReducer = (state = initState, action) => {
                     ...state,
                     isAuth: true,
                     members: action.payload,
-                 } ;  
+                    edit: false,
+                 };  
             
             case ADMIN_SUCCESS:
                 return{
                     ...state,
                     adminloading: action.payload,
+                    edit: false,
                 };  
                 case MEMBERS_LOAD_SUCCESS:
                     return{
                         ...state,
                         members: action.payload,
+                        edit: false,
                     };
                 
         case LOGOUT:
             localStorage.removeItem("token");
             return{
                 isAuth: false,
-                errors: null,
+                // errors: null,
                 user: null,
                 colis: null,
                 allcolis: null,
+                edit: false,
             };
         default:
             return state;

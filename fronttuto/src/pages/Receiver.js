@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Shake from 'react-reveal/Shake';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Jumbotron from 'react-bootstrap/Jumbotron';
@@ -10,6 +11,9 @@ import Footer from './Footer';
 import { useDispatch, useSelector} from 'react-redux';
 import { loadUser } from '../actions/authActions';
 import {receivedParcel } from '../actions/authActions';
+import Flash from 'react-reveal/Flash';
+
+
 
 const Receiver = () => {
 
@@ -31,13 +35,11 @@ const Receiver = () => {
 
    return(
        <div>
-        <NavMain/>
-        <br></br>
-        <br></br>
+        
         <Container>
            <br></br>
-           <jumbotron>
-               {received.length === 0 && <h3 style={{color:'maroon', fontStyle:'cambria'}}> You have no parcels yet to receive</h3>}
+           <Jumbotron>
+               {received.length === 0 && <Flash ><h3 style={{color:'maroon', fontStyle:'cambria'}}> You have no parcels yet to receive</h3></Flash>}
                 {(received.length > 0) && received.map(el => 
                   <div>
                       <Accordion>
@@ -49,20 +51,23 @@ const Receiver = () => {
                               </Card.Header>
                               <Accordion.Collapse eventKey="0">
                               <Card.Body>
-                                  <h3>You have a Parcel of type <strong>{el.type}</strong> to receive in <strong>{el.days} starting on <strong>{el.created_at}</strong></strong> </h3>
-                                  <h2 style={{color:'maroon'}}>We will call you to confirm the delivery</h2>
-                                  <h2 style={{color:'green'}}>THANK YOU FOR YOUR TRUST</h2>
+                                  <h4 style={{fontStyle:'cambria', color:'black'}}>You have a Parcel of type <strong>{el.type} </strong> to receive in <strong>{el.days} days</strong> starting on <strong>{el.created_at} </strong></h4>
+                                  <br></br>
+                                  <h3 style={{color:'maroon',fontFamily:'cambria', fontStyle:'bold'}}>We will call you to confirm the delivery :D </h3>
+                                  <Shake><h1 style={{color:'green', fontStyle:'italic', fontFamily:'cambria'}}>THANK YOU FOR YOUR TRUST</h1></Shake>
                               </Card.Body>
                               </Accordion.Collapse>
                           </Card>
                         </Accordion>
+                        
 
                   </div>)}
+                
                   <br></br>
-           </jumbotron>
+           </Jumbotron>
            <br></br>
        </Container>
-       <Footer/>
+     
        </div>
    )
 

@@ -31,7 +31,7 @@ const Home = () => {
   })
   return(
     <div>
-      <Navbar/>
+     
       <Container>
         
         <br></br>
@@ -83,7 +83,7 @@ const Home = () => {
                    style={{width:'900px', heigth:'200px'}}
                  />
                 <Carousel.Caption>
-                  <h1 style={{color:'darkblue', fontStyle:'italic',fontSize:'50px'}} >Best delevery service</h1>
+                  <h1 style={{color:'darkblue', fontStyle:'italic',fontSize:'50px'}} >Best transportation service</h1>
                   
                 </Carousel.Caption>
              </Carousel.Item>
@@ -104,13 +104,9 @@ const Home = () => {
          </Container>
         <br></br>
       </Container>
-      <Footer/>
+      
       
     </div>  
-     
-     
-
-    
   )
 }
 export default Home;

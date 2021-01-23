@@ -13,13 +13,13 @@ const Footer = () => {
     <div>
     <Navbar className="justify-content-center" textAlign='space-around' activeKey="/home" bg="" variant="primary">
       <Nav.Item>
-        <Nav.Link href="/register">FeedBack<br></br>Vos avis</Nav.Link>
+        <Nav.Link href="/register">FeedBack</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="/login">Partners<br></br>Nos Partenaires</Nav.Link>
+        <Nav.Link eventKey="/login">Partners</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="link-2">Confidence and Security<br></br>Confiance et Sécurité</Nav.Link>
+        <Nav.Link eventKey="link-2">Confidence and Security</Nav.Link>
       </Nav.Item>
       <Nav.Item>
          <Nav.Link eventKey="">Recrutement</Nav.Link>
