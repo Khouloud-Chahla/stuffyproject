@@ -134,6 +134,7 @@ const Sender = ({history}) => {
                              <option  value="tabarka" >Tabarka</option>
                              <option  value="tatawine" >Tatawine</option>
                              <option  value="tozeur" >Tozeur</option>
+                             <option  value="tunis" >Tunis</option>
                              <option  value="zaghouen">Zaghouen</option>
                         </select> 
                         <br></br>
@@ -161,6 +162,7 @@ const Sender = ({history}) => {
                              <option  value="tabarka" >Tabarka</option>
                              <option  value="tatawine" >Tatawine</option>
                              <option  value="tozeur" >Tozeur</option>
+                             <option  value="tunis" >Tunis</option>
                              <option  value="zaghouen">Zaghouen</option>
                            </select> 
                      </div>

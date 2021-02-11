@@ -67,7 +67,8 @@ const Parcels = () => {
                 {allrequest.length === 0 && <Flash><h3 style={{color:'maroon', fontStyle:'cambria'}}> You don't have any requests yet</h3></Flash>}
                 {(allrequest.length > 0) && allrequest.map(el => <Jumbotron>
                   You have sent <strong style={{color:'red'}}>a request</strong> on <strong>{el.created_at}</strong><br></br>to deliver a parcel of type <strong>{el.type} </strong> to the member with email: <strong>{el.receiver}</strong><br></br>
-                  It will be delivered in <strong> {el.days} days </strong>, from <strong>{el.departure}</strong> to <strong>{el.arrival}</strong>. 
+                  It will be delivered in <strong> {el.days} days </strong>, from <strong>{el.departure}</strong> to <strong>{el.arrival}</strong>.<br></br> 
+                  The status of your request: <strong>{el.status}</strong>
                   <br></br> 
                 </Jumbotron>)}
             </Jumbotron>

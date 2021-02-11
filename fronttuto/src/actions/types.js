@@ -45,11 +45,15 @@ export const SEND_CODE_FAIL = "SEND_CODE_FAIL";
 //send new password
 export const SEND_PWD_SUCCESS = "SEND_PWD_SUCCESS";
 export const SEND_PWD_FAIL = "SEND_PWD_FAIL";
-//update the condition of the parcels
-export const COND_SUCCESS = "COND_SUCCESS";
-export const COND_FAIL = "COND_FAIL";
+// //update the condition of the parcels
+// export const COND_SUCCESS = "COND_SUCCESS";
+// export const COND_FAIL = "COND_FAIL";
 //change password
 export const PWD_CHANGE_SUCCESS = "PWD_CHANGE_SUCCESS";
 export const PWD_CHANGE_FAIL = "PWD_CHANGE_FAIL";
+//update status
+export const UPDATE_STATUS_SUCCESS = "UPDATE_STATUS_SUCCESS";
+export const UPDATE_STATUS_FAIL = "UPDATE_STATUS_FAIL";
+
 
 

@@ -33,6 +33,8 @@ import {
     PWD_CHANGE_FAIL,
     SEND_CODE_SUCCESS,
     SEND_CODE_FAIL,
+    UPDATE_STATUS_SUCCESS,
+    UPDATE_STATUS_FAIL,
 } from "../actions/types";
 
 let initState = {
@@ -53,6 +55,7 @@ let initState = {
     registered: false,
     passchange: false,
     generateCode: false,
+    updatereq: false,
 };
 const AuthReducer = (state = initState, action) => {
     switch (action.type) {
@@ -204,6 +207,11 @@ const AuthReducer = (state = initState, action) => {
                         members: action.payload,
                         edit: false,
                     };
+            case UPDATE_STATUS_SUCCESS:
+                return{
+                    ...state,
+                    updatereq: true,
+                }        
                 
         case LOGOUT:
             localStorage.removeItem("token");

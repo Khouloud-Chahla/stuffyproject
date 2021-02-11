@@ -10,7 +10,7 @@ const ColisSchema = mongoose.Schema({
     },
     days:{
         type: Number,
-        
+        required: true,
     },
     type:{
         type: String,
@@ -18,16 +18,24 @@ const ColisSchema = mongoose.Schema({
     },
     departure:{
         type: String,
+        required: true,
         
     },
     arrival:{
         type: String,
+        required: true,
         
     },
     
     receiver:{
         type: String,
+        required: true,
         
+    },
+
+    status:{
+        type:String,
+        default: 'not took yet'
     },
     
   

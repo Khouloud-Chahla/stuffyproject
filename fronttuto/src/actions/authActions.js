@@ -34,6 +34,8 @@ import {
     PWD_CHANGE_FAIL,
     SEND_CODE_SUCCESS,
     SEND_CODE_FAIL,
+    UPDATE_STATUS_SUCCESS,
+    UPDATE_STATUS_FAIL,
 
 } from "./types";
 import axios from 'axios';
@@ -226,17 +228,30 @@ export const adminLoad = () => dispatch => {
          payload: err.response.data,
      }))
  }
- export const updatecondition = (info) => dispatch => {
-     axios.put('/admin/:id', info)
-     .then(res => dispatch({
-         type: COND_SUCCESS,
-         payload: res.data,
-     }))
-     .catch(err => dispatch({
-         type: COND_FAIL,
-         payload: err.response.data,
-     }))
- }
+//  export const updatecondition = (info) => dispatch => {
+//      axios.put('/admin/:id', info)
+//      .then(res => dispatch({
+//          type: COND_SUCCESS,
+//          payload: res.data,
+//      }))
+//      .catch(err => dispatch({
+//          type: COND_FAIL,
+//          payload: err.response.data,
+//      }))
+//  }
+
+export const updateStatus = (info) => dispatch => {
+    setToken()
+    axios.put('/admin', info)
+    .then(res => dispatch({
+        type: UPDATE_STATUS_SUCCESS,
+        payload: res.data,
+    }))
+    .catch(err => dispatch({
+        type: UPDATE_STATUS_FAIL,
+        payload: err.response.data,
+    }))
+}
 
  export const changePWD = (info) => dispatch => {
      setToken();

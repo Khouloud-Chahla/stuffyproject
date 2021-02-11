@@ -25,19 +25,23 @@ router.get('/mbr',(req, res) => {
     })
 })
 //edit condition
-router.put('/:id', [
-    body('condition', 'not specified').isAlpha()
-],(req, res) => {
+router.put('/', [
+    body('etat'),
+    body('num')
+],authMiddleware,(req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()){
           return res.status(400).json(errors.array())
     }
-    Colis.findOneAndUpdate({_id: req.params.id}, {$set:req.body}, {new:true}, (err, colis) => {
-        if(err){
-            return res.send('there is an error')
-        }
-        return res.status(200).send('condition successfully updated')
-    })
+    Colis.findOne({_id: req.body.num})
+         .then(colis => {
+             colis.status = req.body.etat;
+             colis.save()
+             console.log('status updated')
+             return res.status(200).send(colis)
+         })
+         .catch(err => res.send('server error'))
+      
 })
 
 //update a colis

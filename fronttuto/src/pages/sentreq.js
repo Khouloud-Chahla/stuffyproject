@@ -38,9 +38,10 @@ const Sentreq = () => {
                                  </Accordion.Toggle>
                               </Card.Header>
                               <Accordion.Collapse eventKey="0">
-                              <Card.Body><h4>You're sending a parcel on <strong>{auth.colis.created_at}</strong>:</h4>
+                              <Card.Body style={{fontFamily:'cambria'}}><h4>You're sending a parcel on <strong>{auth.colis.created_at}</strong>:</h4>
                               <p>of Type: <strong>{auth.colis.type}</strong> for <strong>{auth.colis.receiver}</strong><br></br>
-                              It will be delivered in <strong>{auth.colis.days} days</strong> from <strong>{auth.colis.departure}</strong> to <strong>{auth.colis.arrival}</strong></p>
+                              It will be delivered in <strong>{auth.colis.days} days</strong> from <strong>{auth.colis.departure}</strong> to <strong>{auth.colis.arrival}</strong><br></br>
+                              The status of your request: <strong>{auth.colis.status}</strong></p>
                               <br></br>
                               <Flash><h1 style={{color:'purple', fontFamily:'cambria', fontStyle:'bold'}}>THANK YOU FOR YOUR TRUST</h1></Flash>
                               </Card.Body>
